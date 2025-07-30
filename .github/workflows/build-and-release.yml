@@ -1,0 +1,100 @@
+name: Build and Release
+
+on:
+  push:
+    tags:
+      - 'v*'  # 当推送 v* 格式的 tag 时触发
+  workflow_dispatch:  # 手动触发
+
+env:
+  BINARY_NAME: danb
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y libcurl4-openssl-dev build-essential
+        
+    - name: Build binary
+      run: |
+        g++ -o ${{ env.BINARY_NAME }} main.cpp -lcurl -O2 -static-libgcc -static-libstdc++
+        strip ${{ env.BINARY_NAME }}  # 移除调试信息，减小文件大小
+        chmod +x ${{ env.BINARY_NAME }}
+        
+    - name: Create build info
+      run: |
+        echo "Built on: $(date)" > build-info.txt
+        echo "Commit: ${{ github.sha }}" >> build-info.txt
+        echo "Tag: ${{ github.ref_name }}" >> build-info.txt
+        
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: danb-linux-x64
+        path: |
+          ${{ env.BINARY_NAME }}
+          build-info.txt
+          
+  release:
+    needs: build
+    runs-on: ubuntu-latest
+    if: startsWith(github.ref, 'refs/tags/')  # 只在 tag 推送时创建 release
+    
+    permissions:
+      contents: write
+      
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Download artifacts
+      uses: actions/download-artifact@v4
+      with:
+        name: danb-linux-x64
+        
+    - name: Create release archive
+      run: |
+        tar -czf danb-linux-x64.tar.gz ${{ env.BINARY_NAME }} build-info.txt
+        
+    - name: Create Release
+      uses: actions/create-release@v1
+      id: create_release
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: ${{ github.ref_name }}
+        release_name: Release ${{ github.ref_name }}
+        body: |
+          ## 🚀 Release ${{ github.ref_name }}
+          
+          ### Changes
+          - Automatic build for Linux x64
+          - Built from commit: ${{ github.sha }}
+          
+          ### Download
+          - **Linux x64**: danb-linux-x64.tar.gz
+          
+          ### Usage
+          ```bash
+          tar -xzf danb-linux-x64.tar.gz
+          ./danb <pdb|cif|fasta> <UniProtID|PDBID>
+          ```
+        draft: false
+        prerelease: false
+        
+    - name: Upload Release Asset
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ./danb-linux-x64.tar.gz
+        asset_name: danb-linux-x64.tar.gz
+        asset_content_type: application/gzip

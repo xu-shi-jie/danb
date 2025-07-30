@@ -39,3 +39,21 @@
 
 # debug information files
 *.dwo
+
+# Project specific
+danb
+danb-debug
+build-info.txt
+*.tar.gz
+
+# Downloaded files (examples)
+*.pdb
+*.cif  
+*.fasta
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
