@@ -61,7 +61,8 @@ Features:
 - Download protein structures in PDB/CIF format
 - Download FASTA sequences
 - Support for UniProt IDs and PDB IDs
-- Automatic source detection"
+- Automatic source detection
+- Custom output path with -o option"
 
 echo "Tag $TAG created successfully!"
 echo "To trigger the GitHub Actions build, push the tag:"
