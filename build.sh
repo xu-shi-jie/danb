@@ -24,4 +24,4 @@ strip danb
 
 echo "Build completed successfully!"
 echo "Binary: ./danb"
-echo "Usage: ./danb <pdb|cif|fasta> <UniProtID|PDBID>"
+echo "Usage: ./danb <pdb|cif|fasta> <UniProtID|PDBID> [-o output_path]"

@@ -75,13 +75,26 @@ int download(const std::string& url, const std::string& output_path) {
 }
 
 int main(int argc, char* argv[]) {
-    if (argc != 3) {
-        std::cerr << "Usage: danb <pdb|cif|fasta> <UniProtID|PDBID>\n";
+    if (argc < 3 || argc > 5) {
+        std::cerr << "Usage: danb <pdb|cif|fasta> <UniProtID|PDBID> [-o output_path]\n";
         return 1;
     }
 
     std::string format = to_lower(argv[1]);
     std::string id = argv[2];
+    std::string output_path;
+
+    // Parse command line arguments for -o option
+    if (argc == 5 && std::string(argv[3]) == "-o") {
+        output_path = argv[4];
+    } else if (argc == 4) {
+        std::cerr << "Error: Expected -o flag before output path\n";
+        std::cerr << "Usage: danb <pdb|cif|fasta> <UniProtID|PDBID> [-o output_path]\n";
+        return 1;
+    } else {
+        // Default output filename
+        output_path = id + "." + format;
+    }
 
     if (format != "pdb" && format != "cif" && format != "fasta") {
         std::cerr << "Error: format must be 'pdb', 'cif', or 'fasta'\n";
@@ -94,6 +107,5 @@ int main(int argc, char* argv[]) {
         return 1;
     }
 
-    std::string filename = id + "." + format;
-    return download(url, filename);
+    return download(url, output_path);
 }

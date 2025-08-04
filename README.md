@@ -9,6 +9,7 @@ Danb comes from the word "danbaizhi" in Chinese, which means "protein". It is a 
 - Support for UniProt IDs and PDB IDs
 - Automatic source detection (UniProt vs PDB)
 - AlphaFold structure support for UniProt IDs
+- Custom output path specification with `-o` option
 
 ## Installation
 
@@ -48,8 +49,13 @@ g++ -o danb main.cpp -lcurl -O2
 ## Usage
 
 ```bash
-danb <pdb|cif|fasta> <UniProtID|PDBID>
+danb <pdb|cif|fasta> <UniProtID|PDBID> [-o output_path]
 ```
+
+**Parameters:**
+- `format`: File format - `pdb`, `cif`, or `fasta`
+- `id`: UniProt ID (e.g., P12345) or PDB ID (e.g., 1abc)
+- `-o output_path`: Optional. Specify custom output file path
 
 **Examples:**
 ```bash
@@ -67,6 +73,15 @@ danb <pdb|cif|fasta> <UniProtID|PDBID>
 
 # Download FASTA sequence by UniProt ID
 ./danb fasta P12345
+
+# Download with custom output path
+./danb pdb 1abc -o /path/to/structures/1abc.pdb
+
+# Download to specific filename
+./danb fasta P12345 -o my_protein.fasta
+
+# Download to current directory with custom name
+./danb cif 2xyz -o structure.cif
 ```
 
 ## Development
