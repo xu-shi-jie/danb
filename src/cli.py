@@ -1,6 +1,6 @@
 """Command-line interface for danb."""
 
-from .downloader import main
+from downloader import main
 
 
 def cli():
