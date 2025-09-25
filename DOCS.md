@@ -1,45 +1,45 @@
 # Table of Contents
 
-* [\_\_init\_\_](#__init__)
-* [config](#config)
-  * [Config](#config.Config)
-    * [\_\_init\_\_](#config.Config.__init__)
-    * [update](#config.Config.update)
-    * [save](#config.Config.save)
-* [cli](#cli)
-  * [cli](#cli.cli)
-* [structure](#structure)
-  * [read\_protein\_file](#structure.read_protein_file)
-* [downloader](#downloader)
-  * [is\_uniprot\_id](#downloader.is_uniprot_id)
-  * [make\_url](#downloader.make_url)
-  * [download\_file](#downloader.download_file)
-  * [main](#downloader.main)
-* [plm](#plm)
-  * [EsmModelInfo](#plm.EsmModelInfo)
-  * [EsmEncoder](#plm.EsmEncoder)
-    * [\_\_init\_\_](#plm.EsmEncoder.__init__)
-    * [forward](#plm.EsmEncoder.forward)
-  * [T5Encoder](#plm.T5Encoder)
-    * [\_\_init\_\_](#plm.T5Encoder.__init__)
-    * [forward](#plm.T5Encoder.forward)
-  * [get\_model](#plm.get_model)
-* [sequence](#sequence)
-  * [read\_or\_download](#sequence.read_or_download)
-  * [cluster](#sequence.cluster)
-  * [search](#sequence.search)
+* [danb](#danb)
+* [danb.config](#danb.config)
+  * [Config](#danb.config.Config)
+    * [\_\_init\_\_](#danb.config.Config.__init__)
+    * [update](#danb.config.Config.update)
+    * [save](#danb.config.Config.save)
+* [danb.cli](#danb.cli)
+  * [cli](#danb.cli.cli)
+* [danb.structure](#danb.structure)
+  * [read\_protein\_file](#danb.structure.read_protein_file)
+* [danb.downloader](#danb.downloader)
+  * [is\_uniprot\_id](#danb.downloader.is_uniprot_id)
+  * [make\_url](#danb.downloader.make_url)
+  * [download\_file](#danb.downloader.download_file)
+  * [main](#danb.downloader.main)
+* [danb.plm](#danb.plm)
+  * [EsmModelInfo](#danb.plm.EsmModelInfo)
+  * [EsmEncoder](#danb.plm.EsmEncoder)
+    * [\_\_init\_\_](#danb.plm.EsmEncoder.__init__)
+    * [forward](#danb.plm.EsmEncoder.forward)
+  * [T5Encoder](#danb.plm.T5Encoder)
+    * [\_\_init\_\_](#danb.plm.T5Encoder.__init__)
+    * [forward](#danb.plm.T5Encoder.forward)
+  * [get\_model](#danb.plm.get_model)
+* [danb.sequence](#danb.sequence)
+  * [read\_or\_download](#danb.sequence.read_or_download)
+  * [cluster](#danb.sequence.cluster)
+  * [search](#danb.sequence.search)
 
-<a id="__init__"></a>
+<a id="danb"></a>
 
-# \_\_init\_\_
+# danb
 
 danb: Python utilities and tools for bioinformatics data processing.
 
-<a id="config"></a>
+<a id="danb.config"></a>
 
-# config
+# danb.config
 
-<a id="config.Config"></a>
+<a id="danb.config.Config"></a>
 
 ## Config Objects
 
@@ -53,7 +53,7 @@ This class allows for reading, updating, and saving configuration settings
 from and to YAML files. Configuration values are stored as attributes of
 the class instance.
 
-<a id="config.Config.__init__"></a>
+<a id="danb.config.Config.__init__"></a>
 
 #### \_\_init\_\_
 
@@ -67,7 +67,7 @@ Initializes the Config object from a YAML file.
 
 - `yaml_file` - The path to the YAML file to load configuration from.
 
-<a id="config.Config.update"></a>
+<a id="danb.config.Config.update"></a>
 
 #### update
 
@@ -85,7 +85,7 @@ file. New configuration values are added.
 - `new_yaml_file` - The path to the YAML file to update the
   configuration from.
 
-<a id="config.Config.save"></a>
+<a id="danb.config.Config.save"></a>
 
 #### save
 
@@ -99,13 +99,13 @@ Saves the current configuration to a YAML file.
 
 - `yaml_file` - The path to the YAML file to save the configuration to.
 
-<a id="cli"></a>
+<a id="danb.cli"></a>
 
-# cli
+# danb.cli
 
 Command-line interface for danb.
 
-<a id="cli.cli"></a>
+<a id="danb.cli.cli"></a>
 
 #### cli
 
@@ -115,11 +115,11 @@ def cli()
 
 Entry point for the danb command-line tool.
 
-<a id="structure"></a>
+<a id="danb.structure"></a>
 
-# structure
+# danb.structure
 
-<a id="structure.read_protein_file"></a>
+<a id="danb.structure.read_protein_file"></a>
 
 #### read\_protein\_file
 
@@ -146,13 +146,13 @@ This function supports PDB and CIF formats, both gzipped and uncompressed.
 
 - `ValueError` - If the file format is not supported.
 
-<a id="downloader"></a>
+<a id="danb.downloader"></a>
 
-# downloader
+# danb.downloader
 
 Downloader module for bioinformatics data files.
 
-<a id="downloader.is_uniprot_id"></a>
+<a id="danb.downloader.is_uniprot_id"></a>
 
 #### is\_uniprot\_id
 
@@ -171,7 +171,7 @@ Check if the given ID is a UniProt ID.
 
   True if the ID appears to be a UniProt ID, False otherwise.
 
-<a id="downloader.make_url"></a>
+<a id="danb.downloader.make_url"></a>
 
 #### make\_url
 
@@ -191,7 +191,7 @@ Generate download URL based on format and protein ID.
 
   The download URL for the specified protein and format.
 
-<a id="downloader.download_file"></a>
+<a id="danb.downloader.download_file"></a>
 
 #### download\_file
 
@@ -211,7 +211,7 @@ Download a file from URL to the specified path.
 
   True if download was successful, False otherwise.
 
-<a id="downloader.main"></a>
+<a id="danb.downloader.main"></a>
 
 #### main
 
@@ -221,11 +221,11 @@ def main() -> int
 
 Main entry point for the danb command-line tool.
 
-<a id="plm"></a>
+<a id="danb.plm"></a>
 
-# plm
+# danb.plm
 
-<a id="plm.EsmModelInfo"></a>
+<a id="danb.plm.EsmModelInfo"></a>
 
 #### EsmModelInfo
 
@@ -245,7 +245,7 @@ Get model information by name.
   A dictionary containing model information, including dimension, number of
   layers, and the model name for Hugging Face.
 
-<a id="plm.EsmEncoder"></a>
+<a id="danb.plm.EsmEncoder"></a>
 
 ## EsmEncoder Objects
 
@@ -267,7 +267,7 @@ window approach.
 - `max_len` - The maximum sequence length for the model.
 - `overlap` - The overlap size for the sliding window.
 
-<a id="plm.EsmEncoder.__init__"></a>
+<a id="danb.plm.EsmEncoder.__init__"></a>
 
 #### \_\_init\_\_
 
@@ -282,7 +282,7 @@ Initializes the EsmEncoder.
 - `model_name` - The name of the ESM model to use.
 - `dev` - The device to run the model on.
 
-<a id="plm.EsmEncoder.forward"></a>
+<a id="danb.plm.EsmEncoder.forward"></a>
 
 #### forward
 
@@ -302,7 +302,7 @@ Encodes a batch of sequences.
 
   A tensor containing the encoded representations of the sequences.
 
-<a id="plm.T5Encoder"></a>
+<a id="danb.plm.T5Encoder"></a>
 
 ## T5Encoder Objects
 
@@ -324,7 +324,7 @@ window approach.
 - `max_len` - The maximum sequence length for the model.
 - `overlap` - The overlap size for the sliding window.
 
-<a id="plm.T5Encoder.__init__"></a>
+<a id="danb.plm.T5Encoder.__init__"></a>
 
 #### \_\_init\_\_
 
@@ -339,7 +339,7 @@ Initializes the T5Encoder.
 - `name` - The name of the T5 model to use.
 - `dev` - The device to run the model on.
 
-<a id="plm.T5Encoder.forward"></a>
+<a id="danb.plm.T5Encoder.forward"></a>
 
 #### forward
 
@@ -359,7 +359,7 @@ Encodes a batch of sequences.
 
   A tensor containing the encoded representations of the sequences.
 
-<a id="plm.get_model"></a>
+<a id="danb.plm.get_model"></a>
 
 #### get\_model
 
@@ -384,11 +384,11 @@ Get a pre-trained model by name.
 
 - `ValueError` - If the model name is unknown.
 
-<a id="sequence"></a>
+<a id="danb.sequence"></a>
 
-# sequence
+# danb.sequence
 
-<a id="sequence.read_or_download"></a>
+<a id="danb.sequence.read_or_download"></a>
 
 #### read\_or\_download
 
@@ -409,7 +409,7 @@ Reads a FASTA file from cache or downloads it from RCSB PDB.
   A list of tuples, where each tuple contains the ID and sequence of a
   record in the FASTA file.
 
-<a id="sequence.cluster"></a>
+<a id="danb.sequence.cluster"></a>
 
 #### cluster
 
@@ -425,7 +425,7 @@ Clusters sequences in a FASTA file using MMseqs2.
 - `cache_dir` - The directory to store temporary files.
 - `seq_id` - The minimum sequence identity for clustering.
 
-<a id="sequence.search"></a>
+<a id="danb.sequence.search"></a>
 
 #### search
 

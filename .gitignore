@@ -41,7 +41,6 @@
 *.dwo
 
 # Project specific
-danb
 danb-debug
 build-info.txt
 *.tar.gz

@@ -46,11 +46,13 @@ Repository = "https://github.com/xu-shi-jie/danb"
 Issues = "https://github.com/xu-shi-jie/danb/issues"
 
 [project.scripts]
-danb = "src.cli:cli"
+danb = "danb.cli:cli"
 
 [tool.setuptools.packages.find]
-where = ["."]
-include = ["src*"]
+where = ["src"]
+
+[tool.setuptools.package-dir]
+"" = "src"
 
 [tool.black]
 line-length = 88
