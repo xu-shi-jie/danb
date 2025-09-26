@@ -35,7 +35,7 @@ def read_protein_file(file: str, model_idx:int=0) -> AtomArray:
         raise ValueError("Unsupported file format. Supported formats are .cif, .cif.gz, .pdb, .pdb.gz, .ent")
         
     if data_type == 'cif':
-        cif_file = cif.PDBxFile.read(file)
+        cif_file = cif.CIFFile.read(file)
         atoms = cif.get_structure(cif_file)[model_idx]
     elif data_type == 'pdb':
         pdb_file = pdb.PDBFile.read(file)
